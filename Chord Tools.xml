@@ -1,0 +1,63 @@
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+   <ribbon>
+      <tabs>
+         <tab id="TabChord" label="Chord Tools">
+            <group id="Transpose" label="Transpose Chords">
+               <button id="TransposeUp"
+                   imageMso = "AnimationMoveEarlier"
+                   label = "Transpose Up"
+                   screentip="Transpose Up"
+                   supertip = "Tranpose 1 semitone up."
+                   onAction = "TransposeUp_Click"
+                   size="large"/>
+               <button id="TransposeDown"
+                   imageMso = "AnimationMoveLater"
+                   label = "Transpose Down"
+                   screentip="Transpose Down"
+                   supertip = "Tranpose 1 semitone down."
+                   onAction = "TransposeDown_Click"
+                   size="large"/>
+            </group>
+            <group id="Accidentals" label="Format Accidentals">
+               <button id="SwitchAccidental"
+                   imageMso = "GridShowHide"
+                   label = "Switch Accidental"
+                   screentip="Switch Accidental"
+                   supertip = "Toggle between sharps and flats."
+                   onAction = "SwitchAccidental_Click"
+                   size="large"/>
+               <button id="SwitchUnicode"
+                   imageMso = "SymbolInsert"
+                   label = "Switch Unicode"
+                   screentip="Switch Unicode"
+                   supertip = "Toggle between ASCII sharps and flats."
+                   onAction = "SwitchUnicode_Click"
+                   size="large"/>
+            </group>
+            <group id="Other" label="Other">
+               <button id="Bold"
+                   imageMso = "Bold"
+                   label = "Bold Chords"
+                   screentip="Bold Chords"
+                   supertip = "Bold all chords."
+                   onAction = "BoldAllChords_Click"
+                   size="large"/>
+               <button id="openUF"
+                   imageMso = "DataFormExcel"
+                   label = "Open Userform"
+                   screentip="Open Userform"
+                   supertip = "Open main userform."
+                   onAction = "OpenUserform_Click"
+                   size="large"/>
+               <button id="getInfo"
+                   imageMso = "ARMPreviewButton"
+                   label = "Info"
+                   screentip="Information"
+                   supertip = "Return contact information."
+                   onAction = "getInfo_Click"
+                   size="large"/>
+            </group>
+         </tab>
+      </tabs>
+   </ribbon>
+</customUI>
