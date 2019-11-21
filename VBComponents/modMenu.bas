@@ -71,6 +71,7 @@ Private Unicode As Boolean
 Sub TransposeUp_Click(control As IRibbonControl)
     
     Call GetDocFormat
+    If GetDocFormat = False Then Exit Sub
     Call TransposeDoc(Sharp, 1, Unicode)
     
 End Sub
@@ -78,6 +79,7 @@ End Sub
 Sub TransposeDown_Click(control As IRibbonControl)
     
     Call GetDocFormat
+    If GetDocFormat = False Then Exit Sub
     Call TransposeDoc(Sharp, -1, Unicode)
     
 End Sub
@@ -85,6 +87,7 @@ End Sub
 Sub SwitchAccidental_Click(control As IRibbonControl)
     
     Call GetDocFormat
+    If GetDocFormat = False Then Exit Sub
     Call TransposeDoc(Not Sharp, 0, Unicode)
     
 End Sub
@@ -92,6 +95,7 @@ End Sub
 Sub SwitchUnicode_Click(control As IRibbonControl)
 
     Call GetDocFormat
+    If GetDocFormat = False Then Exit Sub
     Call ChordMarkerDoc
     Call UnicodeChords(Not Unicode)
 
@@ -118,7 +122,8 @@ Sub getInfo_Click(control As IRibbonControl)
     
 End Sub
 
-Private Sub GetDocFormat()
+Private Function GetDocFormat() as Boolean
+    GetDocFormat = True
     'Set values for chord options
     Dim SFRatio As Single
     SFRatio = AccidentalRatio
@@ -129,7 +134,7 @@ Private Sub GetDocFormat()
             Sharp = False
         Case Else
             MsgBox "Cannot detect chord accidental.", vbExclamation
-            Exit Sub
+            GetDocFormat = False
     End Select
     If SFRatio < 0 Then
         Unicode = True
