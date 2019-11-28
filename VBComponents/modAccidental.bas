@@ -15,7 +15,7 @@ Public Function UnicodeChords(ByVal blnUnicode As Boolean) As Long
     Application.ScreenUpdating = False
     With Selection.Find
         .ClearFormatting
-        .Text = "\|?*\|"
+        .Text = "\|[A-Za-z0-9]*\|"
         .Wrap = wdFindContinue
         .Forward = True
         .MatchWildcards = True
