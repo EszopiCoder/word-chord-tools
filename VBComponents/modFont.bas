@@ -15,7 +15,7 @@ Public Function BoldChords(ByVal isBold As Boolean) As Long
     Application.ScreenUpdating = False
     With Selection.Find
         .ClearFormatting
-        .Text = "\|?*\|"
+        .Text = "\|[A-Za-z0-9]*\|"
         .Wrap = wdFindContinue
         .Forward = True
         .MatchWildcards = True
@@ -40,7 +40,7 @@ Public Function FormatChords(ByVal lngColor As Long, _
     Application.ScreenUpdating = False
     With Selection.Find
         .ClearFormatting
-        .Text = "\|?*\|"
+        .Text = "\|[A-Za-z0-9]*\|"
         .Wrap = wdFindContinue
         .Forward = True
         .MatchWildcards = True
@@ -73,7 +73,7 @@ Public Sub ChordMarkerDoc()
         .Global = True
         .MultiLine = True
         .IgnoreCase = False
-        .Pattern = "([ABCDEFG][b#\u266F\u266D]?[m]?[\(]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\|maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4)?(\))?)(?=\s|\.|\)|-|\/)"
+        .Pattern = "([ABCDEFG][b#\u266F\u266D]?[m]?[\(]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\|maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4)?(\))?)(?=\s\s|\.|\)|-|\/|\r|\n|\s[A-G]|\s\W)"
     End With
     
     ' Format chords in the original string to: |Chord|
@@ -101,7 +101,7 @@ Public Sub ChordMarkerSelection()
         .Global = True
         .MultiLine = True
         .IgnoreCase = False
-        .Pattern = "([ABCDEFG][b#\u266F\u266D]?[m]?[\(]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\|maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4)?(\))?)(?=\s|\.|\)|-|\/)"
+        .Pattern = "([ABCDEFG][b#\u266F\u266D]?[m]?[\(]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\|maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4)?(\))?)(?=\s\s|\.|\)|-|\/|\r|\n|\s[A-G]|\s\W)"
     End With
     
     ' Format chords in the original string to: |Chord|
