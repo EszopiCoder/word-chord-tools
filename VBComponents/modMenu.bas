@@ -151,4 +151,4 @@ Private Function GetDocFormat() as Boolean
     Else
         Unicode = False
     End If
-End Sub
+End Function
