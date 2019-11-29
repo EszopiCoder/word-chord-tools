@@ -7,7 +7,9 @@ Compatibility: Microsoft Word 2007+ for Windows only (regular expressions object
 
 Description: This macro-enabled template contains essential functions for musicians including chord tranposition and chord formatting.
 # Installation Instructions
-Download 'Chord Tools Add In.dotm' from GitHub. 
+Download 'Chord Tools Add In.dotm' from GitHub.
+
+
 **Option 1: Always load when opening Microsoft Word**
 1. Locate the following file path: C:\Users\(INSERT USERNAME)\AppData\Roaming\Microsoft\Word\STARTUP
 2. Cut/Paste file into the 'STARTUP' folder
