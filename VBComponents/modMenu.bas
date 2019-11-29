@@ -50,12 +50,12 @@ Attribute VB_Name = "modMenu"
 '                   supertip = "Open main userform."
 '                   onAction = "OpenUserform_Click"
 '                   size="large"/>
-'               <button id="getInfo"
-'                   imageMso = "ARMPreviewButton"
-'                   label = "Info"
-'                   screentip="Information"
-'                   supertip = "Return contact information."
-'                   onAction = "getInfo_Click"
+'               <button id="getHelp"
+'                   imageMso = "Help"
+'                   label = "Help"
+'                   screentip="Help"
+'                   supertip = "Open link to webpage."
+'                   onAction = "getHelp_Click"
 '                   size="large"/>
 '            </group>
 '         </tab>
@@ -114,14 +114,24 @@ Sub OpenUserForm_Click(control As IRibbonControl)
     
 End Sub
 
-Sub getInfo_Click(control As IRibbonControl)
+Sub getHelp_Click(control As IRibbonControl)
 
-    MsgBox "'Chord Tools' was created by EszopiCoder." & vbNewLine & _
-        "Open Source (https://github.com/EszopiCoder/word-chord-tools)" & vbNewLine & _
-        "Please report bugs and send suggestions to pharm.coder@gmail.com", vbInformation
+    Call OpenHelpLink
     
 End Sub
 
+Public Sub OpenHelpLink()
+    Dim URL As String
+    
+    URL = "https://github.com/EszopiCoder/word-chord-tools"
+    
+    If MsgBox("You are leaving Microsoft Word to the following website: " & URL & _
+    vbNewLine & vbNewLine & "Would you like to proceed?", _
+    vbExclamation + vbYesNo) = vbNo Then Exit Sub
+    
+    ActiveDocument.FollowHyperlink URL
+End Sub                                
+                                
 Private Function GetDocFormat() as Boolean
     GetDocFormat = True
     'Set values for chord options
