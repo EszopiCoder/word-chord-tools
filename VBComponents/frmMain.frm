@@ -265,9 +265,7 @@ lblChange.Caption = 0
 lblSemitone.Caption = " Semitones"
 End Sub
 Private Sub btnHelp_Click()
-    Dim URL As String
-    URL = "https://github.com/EszopiCoder/word-chord-tools"
-    ActiveDocument.FollowHyperlink URL
+   Call OpenHelpLink
 End Sub
 Private Sub btnAbout_Click()
     MsgBox "'Chord Tools' was created by EszopiCoder." & vbNewLine & _
