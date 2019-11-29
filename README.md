@@ -17,13 +17,14 @@ Download 'Chord Tools Add In.dotm' from GitHub.
 
 
 **Option 2: Choose to load after opening Microsoft Word**
-1. Open the 'Developer' tab
-2. Click on the 'Word Add-ins' button
-3. Click the 'Add' button
-4. Cut/Paste file into the displayed file path (C:\Users\INSERT USERNAME\AppData\Roaming\Microsoft\Templates)
-5. Click the 'Open' button
-6. Click the 'OK' button
-7. Click the 'Enable Macros' button
+1. Open Microsoft Word
+2. Open the 'Developer' tab
+3. Click on the 'Word Add-ins' button
+4. Click the 'Add' button
+5. Cut/Paste file into the displayed file path (C:\Users\INSERT USERNAME\AppData\Roaming\Microsoft\Templates)
+6. Click the 'Open' button
+7. Click the 'OK' button
+8. Click the 'Enable Macros' button
 # Main Controls
 - Transpose entire document up one semitone
 - Transpose entire document down one semitone
