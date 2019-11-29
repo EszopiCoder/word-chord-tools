@@ -11,7 +11,7 @@ Download 'Chord Tools Add In.dotm' from GitHub.
 
 
 **Option 1: Always load when opening Microsoft Word**
-1. Locate the following file path: C:\Users\(INSERT USERNAME)\AppData\Roaming\Microsoft\Word\STARTUP
+1. Locate the following file path: C:\Users\INSERT USERNAME\AppData\Roaming\Microsoft\Word\STARTUP
 2. Cut/Paste file into the 'STARTUP' folder
 3. Open Microsoft Word
 
@@ -20,7 +20,7 @@ Download 'Chord Tools Add In.dotm' from GitHub.
 1. Open the 'Developer' tab
 2. Click on the 'Word Add-ins' button
 3. Click the 'Add' button
-4. Cut/Paste file into the displayed file path (C:\Users\(INSERT USERNAME)\AppData\Roaming\Microsoft\Templates)
+4. Cut/Paste file into the displayed file path (C:\Users\INSERT USERNAME\AppData\Roaming\Microsoft\Templates)
 5. Click the 'Open' button
 6. Click the 'OK' button
 7. Click the 'Enable Macros' button
