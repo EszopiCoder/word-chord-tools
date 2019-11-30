@@ -37,8 +37,8 @@ Public Function TransposeSelection(ByVal Sharp As Boolean, _
     
     ' Execute RegEx and put all chords in array
     With objRegEx.Execute(strText)
-        ReDim RegExChords(.Count - 1)
         If .Count = 0 Then Exit Function
+        ReDim RegExChords(.Count - 1)
         For i = 0 To .Count - 1
             RegExChords(i) = .Item(i).Value
         Next i
@@ -101,8 +101,8 @@ Public Function TransposeDoc(ByVal Sharp As Boolean, _
     
     ' Execute RegEx and put all chords in array
     With objRegEx.Execute(strText)
-        ReDim RegExChords(.Count - 1)
         If .Count = 0 Then Exit Function
+        ReDim RegExChords(.Count - 1)
         For i = 0 To .Count - 1
             RegExChords(i) = .Item(i).Value
         Next i
