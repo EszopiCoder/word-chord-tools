@@ -147,12 +147,12 @@ Public Function Transpose(Chord As String, ByVal Sharp As Boolean, _
     'Ensure correct chord length to prevent errors
     Select Case Len(Chord)
         Case 0
-            MsgBox "ERROR: No chord inputted", vbInformation
+            MsgBox "ERROR: No chord inputted.", vbExclamation
             Exit Function
         Case 1 'Add a space to avoid searching for wrong chord in constant string
             Chord = Chord & " "
         Case Is > 2
-            MsgBox "ERROR: Chord length too long", vbInformation
+            MsgBox "ERROR: Chord length too long.", vbExclamation
             Exit Function
     End Select
     
@@ -176,7 +176,7 @@ Public Function Transpose(Chord As String, ByVal Sharp As Boolean, _
     'Find position of chord in constant string
     ChordPosition = InStr(1, ChromaticScale, Chord)
     If ChordPosition = 0 Then
-        MsgBox "ERROR: Chord not found", vbInformation
+    MsgBox "ERROR: Chord not found.", vbExclamation
         Transpose = Chord
         Exit Function
     End If
