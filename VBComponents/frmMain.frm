@@ -51,7 +51,7 @@ cboEncoding.AddItem "Unicode", 1
 
 'Set values for chord options
 Dim SFRatio As Single
-SFRatio = AccidentalRatio
+SFRatio = RegexAccidentalRatio
 Select Case Abs(SFRatio)
     Case Is > 1
         optSharp.Value = True
