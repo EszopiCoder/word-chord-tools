@@ -2,59 +2,45 @@ Attribute VB_Name = "modFont"
 Option Explicit
 
 Public Sub TestFormatFx()
+    Application.ScreenUpdating = False
     Call ChordMarkerDoc
     Call FormatChords(RGB(0, 0, 0), False, False)
+    Application.ScreenUpdating = True
 End Sub
-Public Function BoldChords(ByVal isBold As Boolean) As Long
-    
-    Dim ChordCount As Long
+Public Function BoldChords(ByVal isBold As Boolean)
     
     ' Go to the first line in the document
     Selection.GoTo wdGoToLine, 1
     ' Format and search for |Chord| and remove |
-    Application.ScreenUpdating = False
     With Selection.Find
         .ClearFormatting
-        .Text = "\|[A-Za-z0-9]*\|"
+        .Text = "\|([A-Za-z0-9]*)\|"
         .Wrap = wdFindContinue
         .Forward = True
         .MatchWildcards = True
-        Do While .Execute
-            Selection.Text = Replace(Selection.Text, "|", "")
-            Selection.Font.Bold = isBold
-            Selection.Collapse Direction:=wdCollapseEnd
-            ChordCount = ChordCount + 1
-        Loop
+        .Replacement.Font.Bold = isBold
+        .Replacement.Text = "\1"
+        .Execute Replace:=wdReplaceAll
     End With
-    Application.ScreenUpdating = True
-    BoldChords = ChordCount - 1
 End Function
 Public Function FormatChords(ByVal lngColor As Long, _
-    ByVal isBold As Boolean, ByVal isItalic As Boolean) As Long
-    
-    Dim ChordCount As Long
+    ByVal isBold As Boolean, ByVal isItalic As Boolean)
     
     ' Go to the first line in the document
     Selection.GoTo wdGoToLine, 1
     ' Format and search for |Chord| and remove |
-    Application.ScreenUpdating = False
     With Selection.Find
         .ClearFormatting
-        .Text = "\|[A-Za-z0-9]*\|"
+        .Text = "\|([A-Za-z0-9]*)\|"
         .Wrap = wdFindContinue
         .Forward = True
         .MatchWildcards = True
-        Do While .Execute
-            Selection.Text = Replace(Selection.Text, "|", "")
-            Selection.Font.TextColor.RGB = lngColor
-            Selection.Font.Bold = isBold
-            Selection.Font.Italic = isItalic
-            Selection.Collapse Direction:=wdCollapseEnd
-            ChordCount = ChordCount + 1
-        Loop
+        .Replacement.Font.Bold = isBold
+        .Replacement.Font.Italic = isItalic
+        .Replacement.Font.TextColor.RGB = lngColor
+        .Replacement.Text = "\1"
+        .Execute Replace:=wdReplaceAll
     End With
-    Application.ScreenUpdating = True
-    FormatChords = ChordCount - 1
 End Function
 Public Sub ChordMarkerDoc()
     Dim objRegEx As Object
@@ -73,7 +59,7 @@ Public Sub ChordMarkerDoc()
         .Global = True
         .MultiLine = True
         .IgnoreCase = False
-        .Pattern = "([ABCDEFG][b#\u266F\u266D]?[m]?[\(]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\|maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4)?(\))?)(?=\s\s|\.|\)|-|\/|\r|\n|\s[A-G]|\s\W)"
+        .Pattern = "([A-G][b#\u266F\u266D]?[m]?[\(]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\|maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4)?(\))?)(?=\s\s|\.|\)|-|\/|\r|\n|\s[A-G]|\s\W)"
     End With
     
     ' Format chords in the original string to: |Chord|
@@ -101,7 +87,7 @@ Public Sub ChordMarkerSelection()
         .Global = True
         .MultiLine = True
         .IgnoreCase = False
-        .Pattern = "([ABCDEFG][b#\u266F\u266D]?[m]?[\(]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\|maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4)?(\))?)(?=\s\s|\.|\)|-|\/|\r|\n|\s[A-G]|\s\W)"
+        .Pattern = "([A-G][b#\u266F\u266D]?[m]?[\(]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\|maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4)?(\))?)(?=\s\s|\.|\)|-|\/|\r|\n|\s[A-G]|\s\W)"
     End With
     
     ' Format chords in the original string to: |Chord|
@@ -109,7 +95,6 @@ Public Sub ChordMarkerSelection()
     strText = objRegEx.Replace(strText, "|$1|")
     
     ' Replace text and paste formatting
-    ' Remove excess carriage return at the end of string
     Selection.Text = strText
     Selection.PasteFormat
     Selection.Collapse wdCollapseEnd
