@@ -78,6 +78,7 @@ With Selection.Find
     .Forward = True 'Forward: Search toward the end of the document
     .Format = True
     .MatchWildcards = True 'Uses wildcards to search see above link
+    .Replacement.Text = ""
     
     'Perform find function and loop through each find
     Do While .Execute
