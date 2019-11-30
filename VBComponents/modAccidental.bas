@@ -37,7 +37,7 @@ Public Function UnicodeChords(ByVal blnUnicode As Boolean) As Long
 End Function
 
 Sub TestAccidentalRatio()
-Select Case Abs(AccidentalRatio)
+Select Case Abs(RegexAccidentalRatio)
     Case Is > 1
         MsgBox "Sharp"
     Case Is < 1
@@ -46,6 +46,67 @@ Select Case Abs(AccidentalRatio)
         MsgBox "Neither"
 End Select
 End Sub
+
+Public Function RegexAccidentalRatio() As Single
+    Dim objRegEx As Object
+    Dim strText As String
+    Dim i As Long
+    Dim RegExChords() As String
+    
+    Dim SharpCount As Integer
+    Dim FlatCount As Integer
+    Dim blnUnicode As Boolean
+    
+    SharpCount = 0
+    FlatCount = 0
+    blnUnicode = False
+    
+    ' Set variables
+    strText = ActiveDocument.Range.Text
+    
+    ' Save formatting
+    ActiveDocument.Range.Select
+    Selection.CopyFormat
+    
+    ' Set up RegEx
+    Set objRegEx = CreateObject("VBScript.RegExp")
+    With objRegEx
+        .Global = True
+        .MultiLine = True
+        .IgnoreCase = False
+        .Pattern = "([A-G][b#\u266F\u266D]?(?=(\s(?![a-zH-Z])|\r|\n)|(?=(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7??\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\|maj7|m6|m7|m7b5|m9|m1??1|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4|\))(?=(\s|\/)))|(?=(\/|\.|-|\(|\)))))"
+    End With
+    
+    ' Execute RegEx and put all chords in array
+    With objRegEx.Execute(strText)
+        If .Count = 0 Then Exit Function
+        'ReDim RegExChords(.Count - 1)
+        For i = 0 To .Count - 1
+            Select Case Mid(.Item(i).Value, 2, 1)
+                Case "#"
+                    SharpCount = SharpCount + 1
+                Case "b"
+                    FlatCount = FlatCount + 1
+                Case ChrW(9839) 'Unicode sharp
+                    SharpCount = SharpCount + 1
+                    blnUnicode = True
+                Case ChrW(9837) 'Unicode flat
+                    FlatCount = FlatCount + 1
+                    blnUnicode = True
+            End Select
+        Next i
+    End With
+    
+    'Prevent undefined and indeterminant values
+    If SharpCount = 0 Then SharpCount = 1
+    If FlatCount = 0 Then FlatCount = 1
+    
+    If blnUnicode = True Then
+        RegexAccidentalRatio = -SharpCount / FlatCount
+    Else
+        RegexAccidentalRatio = SharpCount / FlatCount
+    End If
+End Function
 
 Function AccidentalRatio() As Single
 Dim SharpCount As Integer
