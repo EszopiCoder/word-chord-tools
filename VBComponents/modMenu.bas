@@ -137,7 +137,7 @@ Private Function GetDocFormat() as Boolean
     GetDocFormat = True
     'Set values for chord options
     Dim SFRatio As Single
-    SFRatio = AccidentalRatio
+    SFRatio = RegexAccidentalRatio
     Select Case Abs(SFRatio)
         Case Is > 1
             Sharp = True
