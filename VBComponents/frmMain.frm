@@ -125,10 +125,11 @@ Else
 End If
 
 'Change the font of the chords based on user input
+    Application.ScreenUpdating = False
     Call modFont.ChordMarkerDoc
-    MsgBox modFont.FormatChords(CLng(Replace(lblColor.BackColor, "-", "")), _
-    tglBold.Value, tglItalic.Value) & " chords detected.", vbInformation, Me.Caption
-
+    Call modFont.FormatChords(CLng(Replace(lblColor.BackColor, "-", "")), _
+    tglBold.Value, tglItalic.Value)
+    Application.ScreenUpdating = True
 End Sub
 Private Sub optSharp_Click()
 Dim intRtrn As Integer
@@ -169,21 +170,24 @@ If MsgBox("Would you like to change the accidentals to flats?", vbYesNo, Me.Capt
     Call TransposeDoc(False, 0, blnUnicode)
 End Sub
 Private Sub cboEncoding_Change()
-Dim intRtrn As Integer
 
 'Check if running Userform_Initialize
 If isRunning = True Then Exit Sub
 
+'Detect if chord accidental is chosen
+If optSharp.Value = False And optFlat.Value = False Then
+    MsgBox "Choose a chord accidental.", vbExclamation, Me.Caption
+    Exit Sub
+End If               
+                     
 Select Case cboEncoding.ListIndex
     Case 0 'ASCII
         If MsgBox("Would you like to change the encoding to ASCII?", vbYesNo, Me.Caption) = vbYes Then
-            Call ChordMarkerDoc
-            Call UnicodeChords(False)
+            Call TransposeDoc(optSharp.Value, 0, False)
         End If
     Case 1 'Unicode
         If MsgBox("Would you like to change the encoding to Unicode?", vbYesNo, Me.Caption) = vbYes Then
-            Call ChordMarkerDoc
-            Call UnicodeChords(True)
+            Call TransposeDoc(optSharp.Value, 0, True)
         End If
 End Select
 End Sub
@@ -192,7 +196,7 @@ Dim blnUnicode As Boolean
 
 'Detect if chord accidental is chosen
 If optSharp.Value = False And optFlat.Value = False Then
-    MsgBox "Choose a chord accidental", vbExclamation, Me.Caption
+    MsgBox "Choose a chord accidental.", vbExclamation, Me.Caption
     Exit Sub
 End If
 'Determine if unicode is chosen
@@ -219,7 +223,7 @@ Dim blnUnicode As Boolean
 
 'Detect if chord accidental is chosen
 If optSharp.Value = False And optFlat.Value = False Then
-    MsgBox "Choose a chord accidental", vbExclamation, Me.Caption
+    MsgBox "Choose a chord accidental.", vbExclamation, Me.Caption
     Exit Sub
 End If
 'Determine if unicode is chosen
@@ -246,7 +250,7 @@ Dim blnUnicode As Boolean
 
 'Detect if chord accidental is chosen
 If optSharp.Value = False And optFlat.Value = False Then
-    MsgBox "Choose a chord accidental", vbExclamation, Me.Caption
+    MsgBox "Choose a chord accidental.", vbExclamation, Me.Caption
     Exit Sub
 End If
 'Determine if unicode is chosen
