@@ -96,15 +96,16 @@ Sub SwitchUnicode_Click(control As IRibbonControl)
 
     Call GetDocFormat
     If GetDocFormat = False Then Exit Sub
-    Call ChordMarkerDoc
-    Call UnicodeChords(Not Unicode)
+    Call TransposeDoc(Sharp, 0, Not Unicode)
 
 End Sub
 
 Sub BoldAllChords_Click(control As IRibbonControl)
 
+    Application.ScreenUpdating = False
     Call ChordMarkerDoc
     Call BoldChords(True)
+    Application.ScreenUpdating = True
 
 End Sub
 
